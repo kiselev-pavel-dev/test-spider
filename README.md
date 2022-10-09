@@ -7,6 +7,7 @@
     PostgreSQL
     Docker
     Redoc
+    Pytest
 
 
 # Запуск и работа с проектом
@@ -52,8 +53,14 @@ docker-compose exec web python manage.py createsuperuser
 Теперь можно зайти в админку _http://localhost/admin/_ под вашим логином администратора.
 
 
-# Примеры запросов к API.
+# Документация API.
 По адресу http://localhost/redoc/ Вы можете увидеть полную документацию по API
+
+# Тестирование
+Чтобы выполнить тестирование необходимо перейти в папку spider и выполнить:
+```python
+pytest
+```
 
 ### <br /> Автор проекта:
 Киселев Павел<br />
