@@ -142,5 +142,30 @@ class OrganizationWriteSerializer(serializers.ModelSerializer):
         ProductOrganization.objects.bulk_create(produsts_list)
         return organization
 
+    def update(self, instance, validated_data):
+        districts = validated_data.pop("district")
+        products = validated_data.pop("product")
+        products = self.context["request"].data["product"]
+        ProductOrganization.objects.filter(organization=instance).delete()
+        produsts_list = []
+        for product in products:
+            product_obj = get_object_or_404(Product, pk=product["id"])
+            produsts_list.append(
+                ProductOrganization(
+                    product=product_obj,
+                    organization=instance,
+                    price=product["price"],
+                )
+            )
+        ProductOrganization.objects.bulk_create(produsts_list)
+        instance.district.set(districts)
+        instance.name = validated_data.get('name', instance.name)
+        instance.description = validated_data.get(
+            'description', instance.description
+        )
+        instance.network = validated_data.get('network', instance.network)
+        instance.save()
+        return instance
+
     def to_representation(self, instance):
         return OrganizationSerializer(instance, context=self.context).data
