@@ -21,10 +21,11 @@ git clone https://github.com/kiselev-pavel-dev/test-spider.git
 cd test-spider
 ```
 
-3) Создать и активировать виртуальное окружение
+3) Создать и активировать виртуальное окружение, установить зависимости
 ```python
 python -m venv venv
 source venv/scripts/activate (Windows)
+pip install -r requirements.txt
 ```
 4) Создать файл ```.env``` в корневой папке проекта и заполнить его всеми ключами:
 ```
